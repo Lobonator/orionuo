@@ -34,12 +34,15 @@ jobs:
         run: |
           npm i
           npm run build-all
+          npm run doc
           
       - name: Archive Artifacts
         uses: actions/upload-artifact@v2
         with:
           name: build-output
-          path: dist/*.*
+          path: |
+            dist/*.*
+            docs/*.*
           
       - name: release
         uses: "marvinpinto/action-automatic-releases@latest"
@@ -50,4 +53,5 @@ jobs:
           title: "${{ steps.package-version.outputs.current-version }}"
           files: |
             dist/*.*
+            docs/*.*
         
